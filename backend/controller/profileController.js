@@ -17,27 +17,30 @@ const getProfile = async (req, res) => {
 }
 
 const postProfile = async (req, res) => {
-    try {
-        const newUser = new Profile({
-            userName: req.body.userName,
-            email: req.body.email,
-            password: req.body.password
-        })
-        const saveUser = await newUser.save();
-        res.status(200).json(newUser);
-    } catch (error) {
-        res.status(400).send(error)
-    }
+
+    const { userName, email, password, favorite } = req.body;
+    Profile.findOne({ email: email }, (err, user) => {
+        if (user) {
+            res.send({ message: "Ops, this email is already used!" })
+        } else {
+            const user = new Profile({ userName, email, password, favorite })
+            user.save(err => {
+                if (err) {
+                    res.send(err)
+                } else {
+                    res.send({ user })
+                }
+            })
+        }
+    })
 }
 
 const putProfile = async (req, res) => {
+
+    const { userName, email, password, favorite } = req.body;
     try {
         const updateUser = await Profile.updateOne({ _id: req.params.id },
-            {
-                userName: req.body.userName,
-                email: req.body.email,
-                password: req.body.password
-            })
+            { userName, email, password, favorite })
         res.status(200).json(updateUser);
     } catch (error) {
         res.status(400).send(error)
