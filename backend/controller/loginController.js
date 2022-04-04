@@ -1,14 +1,14 @@
 const profile = require('../models/Profile');
 
 const loginUser = async (req, res) => {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await profile.findOne({ userName, password }).lean();
+    const user = await profile.findOne({ email, password }).lean();
 
     if (user) {
-        res.json({ id: user._id, userName: user.userName })
+        res.json({ id: user._id, userName: user.userName, email: user.email, password: user.password })
     } else {
-        res.json({ error: 'Invalid nickname or password!!' })
+        res.json({ error: 'Invalid email or password!!' })
     }
 }
 
