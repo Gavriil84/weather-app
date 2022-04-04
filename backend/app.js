@@ -4,8 +4,10 @@ const port = 5000;
 const routes = require('./routes/index');
 const connectDB = require('./config/connect');
 const app = express();
+const cors = require('cors')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 
 connectDB.then(() => {
