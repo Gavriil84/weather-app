@@ -12,8 +12,8 @@ const Home = () => {
     const [location, setLocation] = useState('');
 
 
-    const current = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=e4befada4a4165c700b3f433a15e6371`;
-    const weekly = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=e4befada4a4165c700b3f433a15e6371`;
+    const current = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=e4befada4a4165c700b3f433a15e6371`;
+    const weekly = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=e4befada4a4165c700b3f433a15e6371`;
 
 
 
@@ -56,12 +56,7 @@ const Home = () => {
         <div className='home'>
             <div className="search">
 
-
-                <label htmlFor="location">Search your location</label>
-                <input type="text" value={location} onChange={handleChange} onKeyPress={search} />
-
-
-
+                <input type="text" value={location} placeholder='Enter location' onChange={handleChange} onKeyPress={search} />
 
             </div>
             <div className="current">
@@ -72,7 +67,7 @@ const Home = () => {
                     <p>{currWeather.name}</p>
                 </div>
                 <div className="currentTemp">
-                    {currWeather.main ? (<p>{currWeather.main.temp} &#8451;</p>) : (null)}
+                    {currWeather.main ? (<p>{currWeather.main.temp.toFixed(1)} &#8451;</p>) : (null)}
                 </div>
                 <div className="currentWeather">
                     {currWeather.weather ? (<p>{currWeather.weather[0].main}</p>) : (null)}
@@ -99,7 +94,7 @@ const Home = () => {
                             {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[8].weather[0].icon}@2x.png`} />) : (null)}
                         </div>
                         <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[8].main.temp} &#8451;</p>) : (null)}
+                            {validLocation ? (<p>{weekWeather.list[8].main.temp.toFixed()} &#8451;</p>) : (null)}
                         </div>
                     </div>
 
@@ -115,7 +110,7 @@ const Home = () => {
                             {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[16].weather[0].icon}@2x.png`} />) : (null)}
                         </div>
                         <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[16].main.temp} &#8451;</p>) : (null)}
+                            {validLocation ? (<p>{weekWeather.list[16].main.temp.toFixed()} &#8451;</p>) : (null)}
                         </div>
                     </div>
 
@@ -132,7 +127,7 @@ const Home = () => {
                             {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[24].weather[0].icon}@2x.png`} />) : (null)}
                         </div>
                         <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[24].main.temp} &#8451;</p>) : (null)}
+                            {validLocation ? (<p>{weekWeather.list[24].main.temp.toFixed()} &#8451;</p>) : (null)}
                         </div>
                     </div>
 
@@ -148,7 +143,7 @@ const Home = () => {
                             {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[32].weather[0].icon}@2x.png`} />) : (null)}
                         </div>
                         <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[32].main.temp} &#8451;</p>) : (null)}
+                            {validLocation ? (<p>{weekWeather.list[32].main.temp.toFixed()} &#8451;</p>) : (null)}
                         </div>
                     </div>
                 </div>
