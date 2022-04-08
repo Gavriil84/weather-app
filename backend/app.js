@@ -12,7 +12,7 @@ app.use(cors())
 
 connectDB.then(() => {
     console.log("connected to Database!");
-    app.listen(port, () => console.log(`Running app on PORT:${port}`))
+    app.listen(process.env.PORT || port, () => console.log(`Running app on PORT:${port}`))
 });
 
 
