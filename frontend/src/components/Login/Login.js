@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { Link, Route, useNavigate } from 'react-router-dom';
 import Button from '../../shared/Button'
 
 import './Login.scss';
@@ -8,6 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [err, setErr] = useState(false);
+    const navigate = useNavigate();
 
     const login = async (e) => {
         e.preventDefault();
@@ -27,6 +29,7 @@ const Login = () => {
                 setErr(false)
                 setEmail('')
                 setPassword('')
+                navigate('/home')
             } else {
                 setErr(true)
                 console.log(data)
@@ -54,7 +57,7 @@ const Login = () => {
             <form onSubmit={login}>
                 <label>
                     <p>Email</p>
-                    <input type="email" name="email" value={email} onChange={emailHandler} />
+                    <input type="text" name="email" value={email} onChange={emailHandler} />
                 </label>
 
                 <label>
@@ -62,8 +65,8 @@ const Login = () => {
                     <input type="password" name="password" value={password} onChange={passwordHandler} />
                 </label>
 
-                <span>Don't have an account? <button>Create account</button></span>
-                <Button type='submit'>Log In</Button>
+                <span>Don't have an account? <Link to='/signup'>Create account</Link></span>
+                <Button type='submit' >Log In</Button>
             </form>
         </div>
     )
