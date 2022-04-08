@@ -5,18 +5,18 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import Signup from './components/Sigup/Signup';
+import Header from './shared/Header/Header';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Link to="/login">Login</Link> */}
-        {/* Header comes here */}
+        <Header />
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<Home />} />
-          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </div>
