@@ -13,6 +13,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "ajv": "^8.11.0",
+        "ajv-errors": "^3.0.0",
+        "ajv-formats": "^2.1.1",
+        "ajv-keywords": "^5.1.0",
         "axios": "^0.26.1",
         "cors": "^2.8.5",
         "debounce": "^1.2.1",
@@ -20,7 +24,8 @@
         "express": "^4.17.3",
         "moment": "^2.29.1",
         "mongoose": "^6.2.8",
-        "sass": "^1.49.9"
+        "sass": "^1.49.9",
+        "validator": "^13.7.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.15"
