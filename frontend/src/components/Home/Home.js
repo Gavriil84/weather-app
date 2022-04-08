@@ -10,6 +10,7 @@ const Home = () => {
     const [weekWeather, setWeekWeather] = useState({});
     const [validLocation, setValidLocation] = useState('');
     const [location, setLocation] = useState('');
+    const [favoriteArr, setFavoriteArr] = useState([]);
 
 
     const current = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=e4befada4a4165c700b3f433a15e6371`;
@@ -28,9 +29,23 @@ const Home = () => {
                 setWeekWeather(res.data);
                 console.log(res.data.list[0].weather[0])
             })
-
             setLocation('')
         }
+    }
+
+    const addFavorite = (e) => {
+        e.preventDefault();
+        setFavoriteArr([...favoriteArr, currWeather.name]);
+    }
+
+    const updateFavorite = (e) => {
+
+        let userId = localStorage.userInfo.replaceAll('"', '');
+        let favoriteLocation = {
+            favorite: favoriteArr
+        }
+
+        axios.put(`http://localhost:5000/api/v1/profile/${userId}`, favoriteLocation)
     }
 
     const debouncedSave = useCallback(
@@ -42,7 +57,6 @@ const Home = () => {
         setLocation(location)
 
         debouncedSave(location)
-        // setLocation(e.target.value)
     }
 
     const hourFormat = (date) => {
@@ -59,95 +73,107 @@ const Home = () => {
                 <input type="text" value={location} placeholder='Enter location' onChange={handleChange} onKeyPress={search} />
 
             </div>
-            <div className="current">
-
-
-                <h2>Current Weather</h2>
-                <div className="location">
-                    <p>{currWeather.name}</p>
-                </div>
-                <div className="currentTemp">
-                    {currWeather.main ? (<p>{currWeather.main.temp.toFixed(1)} &#8451;</p>) : (null)}
-                </div>
-                <div className="currentWeather">
-                    {currWeather.weather ? (<p>{currWeather.weather[0].main}</p>) : (null)}
-                </div>
-                <div className="currentIcon">
-                    {currWeather.weather ? (<img src={`http://openweathermap.org/img/wn/${currWeather.weather[0].icon}@2x.png`} />) : (null)}
-                </div>
-            </div>
-
-            <div className="weekly">
-                <h2>Weekly Forecast</h2>
-
-                <div className="weatherWrapper">
-
-
-                    <div className="day1">
-                        <div className="day">
-                            {validLocation ? (<p>{hourFormat(weekWeather.list[8].dt_txt)}</p>) : (null)}
-                        </div>
-                        <div className="weather">
-                            {validLocation ? (<p>{weekWeather.list[8].weather[0].main}</p>) : (null)}
-                        </div>
-                        <div className="weeklyIcon">
-                            {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[8].weather[0].icon}@2x.png`} />) : (null)}
-                        </div>
-                        <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[8].main.temp.toFixed()} &#8451;</p>) : (null)}
-                        </div>
+            {validLocation ? (
+                <div className="current">
+                    <h2>Current Weather</h2>
+                    <div className="location">
+                        <p>{currWeather.name}</p>
+                        <Button onClick={(e) => addFavorite(e)}>Add Favorite</Button>
+                        <Button onClick={updateFavorite}>Update Favorite List</Button>
                     </div>
-
-
-                    <div className="day2">
-                        <div className="day">
-                            {validLocation ? (<p>{hourFormat(weekWeather.list[16].dt_txt)}</p>) : (null)}
-                        </div>
-                        <div className="weather">
-                            {validLocation ? (<p>{weekWeather.list[16].weather[0].main}</p>) : (null)}
-                        </div>
-                        <div className="weeklyIcon">
-                            {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[16].weather[0].icon}@2x.png`} />) : (null)}
-                        </div>
-                        <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[16].main.temp.toFixed()} &#8451;</p>) : (null)}
-                        </div>
+                    <div className="currentTemp">
+                        {currWeather.main ? (<p>{currWeather.main.temp.toFixed(1)} &#8451;</p>) : (null)}
                     </div>
-
-
-                    <div className="day3">
-                        <div className="day">
-                            {validLocation ? (<p>{hourFormat(weekWeather.list[24].dt_txt)}</p>) : (null)}
-                        </div>
-                        <div className="weather">
-                            {validLocation ? (<p>{weekWeather.list[24].weather[0].main}</p>) : (null)}
-                        </div>
-
-                        <div className="weeklyIcon">
-                            {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[24].weather[0].icon}@2x.png`} />) : (null)}
-                        </div>
-                        <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[24].main.temp.toFixed()} &#8451;</p>) : (null)}
-                        </div>
+                    <div className="currentWeather">
+                        {currWeather.weather ? (<p>{currWeather.weather[0].main}</p>) : (null)}
                     </div>
-
-                    <div className="day4">
-                        <div className="day">
-                            {validLocation ? (<p>{hourFormat(weekWeather.list[32].dt_txt)}</p>) : (null)}
-                        </div>
-                        <div className="weather">
-                            {validLocation ? (<p>{weekWeather.list[32].weather[0].main}</p>) : (null)}
-                        </div>
-
-                        <div className="weeklyIcon">
-                            {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[32].weather[0].icon}@2x.png`} />) : (null)}
-                        </div>
-                        <div className="temp">
-                            {validLocation ? (<p>{weekWeather.list[32].main.temp.toFixed()} &#8451;</p>) : (null)}
-                        </div>
+                    <div className="currentIcon">
+                        {currWeather.weather ? (<img src={`http://openweathermap.org/img/wn/${currWeather.weather[0].icon}@2x.png`} />) : (null)}
                     </div>
                 </div>
-            </div>
+
+
+
+            ) : (
+                <h1>Data not found. Search for a location.</h1>
+            )}
+
+
+            {validLocation ? (
+
+                <div className="weekly">
+                    <h2>Weekly Forecast</h2>
+
+                    <div className="weatherWrapper">
+
+
+                        <div className="day1">
+                            <div className="day">
+                                {validLocation ? (<p>{hourFormat(weekWeather.list[8].dt_txt)}</p>) : (null)}
+                            </div>
+                            <div className="weather">
+                                {validLocation ? (<p>{weekWeather.list[8].weather[0].main}</p>) : (null)}
+                            </div>
+                            <div className="weeklyIcon">
+                                {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[8].weather[0].icon}@2x.png`} />) : (null)}
+                            </div>
+                            <div className="temp">
+                                {validLocation ? (<p>{weekWeather.list[8].main.temp.toFixed()} &#8451;</p>) : (null)}
+                            </div>
+                        </div>
+
+
+                        <div className="day2">
+                            <div className="day">
+                                {validLocation ? (<p>{hourFormat(weekWeather.list[16].dt_txt)}</p>) : (null)}
+                            </div>
+                            <div className="weather">
+                                {validLocation ? (<p>{weekWeather.list[16].weather[0].main}</p>) : (null)}
+                            </div>
+                            <div className="weeklyIcon">
+                                {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[16].weather[0].icon}@2x.png`} />) : (null)}
+                            </div>
+                            <div className="temp">
+                                {validLocation ? (<p>{weekWeather.list[16].main.temp.toFixed()} &#8451;</p>) : (null)}
+                            </div>
+                        </div>
+
+
+                        <div className="day3">
+                            <div className="day">
+                                {validLocation ? (<p>{hourFormat(weekWeather.list[24].dt_txt)}</p>) : (null)}
+                            </div>
+                            <div className="weather">
+                                {validLocation ? (<p>{weekWeather.list[24].weather[0].main}</p>) : (null)}
+                            </div>
+
+                            <div className="weeklyIcon">
+                                {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[24].weather[0].icon}@2x.png`} />) : (null)}
+                            </div>
+                            <div className="temp">
+                                {validLocation ? (<p>{weekWeather.list[24].main.temp.toFixed()} &#8451;</p>) : (null)}
+                            </div>
+                        </div>
+
+                        <div className="day4">
+                            <div className="day">
+                                {validLocation ? (<p>{hourFormat(weekWeather.list[32].dt_txt)}</p>) : (null)}
+                            </div>
+                            <div className="weather">
+                                {validLocation ? (<p>{weekWeather.list[32].weather[0].main}</p>) : (null)}
+                            </div>
+
+                            <div className="weeklyIcon">
+                                {validLocation ? (<img src={`http://openweathermap.org/img/wn/${weekWeather.list[32].weather[0].icon}@2x.png`} />) : (null)}
+                            </div>
+                            <div className="temp">
+                                {validLocation ? (<p>{weekWeather.list[32].main.temp.toFixed()} &#8451;</p>) : (null)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : (null)}
+
         </div>
     )
 }
