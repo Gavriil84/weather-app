@@ -22,7 +22,7 @@ const Signup = (props) => {
             }
 
 
-            const { data } = await axios.post('https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile', { email, userName, password }, config)
+            const { data } = await axios.post('/api/v1/profile', { email, userName, password }, config)
             setEmail('')
             setPassword('')
             setUserName('')
