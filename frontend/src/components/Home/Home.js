@@ -45,7 +45,7 @@ const Home = () => {
             favorite: favoriteArr
         }
 
-        axios.put(`https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile/${userId}`, favoriteLocation)
+        axios.put(`/api/v1/profile/${userId}`, favoriteLocation)
     }
 
     const debouncedSave = useCallback(
