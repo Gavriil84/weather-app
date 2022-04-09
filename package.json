@@ -5,27 +5,21 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node backend/app.js",
-        "doraemon": "nodemon backend/app.js",
-        "client": "npm start --prefix frontend"
+        "start": "cd ./backend/ && npm install && node app.js",
+        "heroku-postbuild": "cd ./frontend/ && npm install && npm run build",
+        "backend": "cd ./backend/ && nodemon app.js ",
+        "frontend": "cd ./frontend/ && npm run start"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "ajv": "^8.11.0",
-        "ajv-errors": "^3.0.0",
         "ajv-formats": "^2.1.1",
-        "ajv-keywords": "^5.1.0",
         "axios": "^0.26.1",
-        "cors": "^2.8.5",
         "debounce": "^1.2.1",
         "dotenv": "^16.0.0",
-        "express": "^4.17.3",
         "moment": "^2.29.1",
-        "mongoose": "^6.2.8",
-        "sass": "^1.49.9",
-        "validator": "^13.7.0"
+        "sass": "^1.49.9"
     },
     "devDependencies": {
         "nodemon": "^2.0.15"
