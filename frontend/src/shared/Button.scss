@@ -1,9 +1,13 @@
 .loginbtn,
 .signupbtn {
+    width: 100%;
     background-color: #afedee;
     border: none;
-    padding: 10px;
+    padding: 10px 30px;
     font-size: 18px;
+    border-radius: 8px;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 .addFavorite {
