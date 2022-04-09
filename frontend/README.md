@@ -1,5 +1,7 @@
 # Link for the website
 
+https://wmdd4936-gwatanabe00.herokuapp.com/
+
 # Instructions for building and running the project;
 
 step 1: cd backend/
@@ -95,3 +97,5 @@ https://openweathermap.org/api
 
 react router dom
 https://v5.reactrouter.com/web/guides/quick-start
+
+https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
