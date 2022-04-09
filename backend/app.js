@@ -10,8 +10,7 @@ const { options } = require('./routes/index');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
-let distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+app.use(express.static(__dirname + "../frontend/public/index.html"));
 
 
 connectDB.then(() => {
