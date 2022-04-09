@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Link for the website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Instructions for building and running the project;
 
-## Available Scripts
+step 1: cd backend/
+step 2: npm install
+step 3: cd frontend/
+step 4: npm install
+step 5: cd ../
+step 6: npm install
 
-In the project directory, you can run:
+In case you want to open the application on your local, do the followings.
+npm run frontend
+npm run backend
 
-### `npm start`
+# Description of the App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is a weather app where you can search for the location's weather you want.
+Current weather and weekly weather is availble.
+Once you login, you have the option to pick you favorite/ frequently seen location to
+add to you favorite list.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Features I'm proud of
 
-### `npm test`
+1. Getting real-time weather from external API
+2. Login function
+3. Create account function
+4. Add location to user's favorite list
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# How to use
 
-### `npm run build`
+1. Create an account
+2. Login
+3. Search for the location you want
+4. If you want to add that location to your favorites, press "add to list" button.
+5. If you want to add more locations, repeat the 4) flow.
+6. If you want to submit your favorite list, press the "Update favorite list" button.
+7. Go to your profile, and you'll see all the locations you added to you favorite.
+8. If you click on the loaction you saved, you'll be able to see the current weather of that location.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# API documentation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 'api/vi/profile/' GET
+   This API gets all the users registered in this application
+   Response format is JSON
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. 'api/vi/profile/' POST
+   This API posts the body from the client side to create user accounts
+   Response format is JSON
 
-### `npm run eject`
+https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+{
+"userName": "Jon",
+"email": "jon@email.com",
+"password": "test123"
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. 'api/vi/profile/:id' GET
+   This API get one user registered in this application by the id
+   Response format is JSON
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. 'api/vi/profile/:id' PUT
+   This API updates the user information. In this app, this is used to add locations to users favorite list.
+   Response format is JSON
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile/62510c29bff2674fc8701760
 
-## Learn More
+{
+"favorite": ["Tokyo", "Saitama", "Chiba", "Osaka"]
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. '/api/v1/login' POST
+   This API is used to check whether the body that contains the user information matches the user information on the database.
+   If it matches, the user can login to the app.
+   Response format is JSON
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/login
 
-### Code Splitting
+{
+"email": "gabe@mail.com",
+"password": "gabriel"
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# References
 
-### Analyzing the Bundle Size
+debounce
+https://www.npmjs.com/package/debounce
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+moment
+https://momentjs.com/
 
-### Making a Progressive Web App
+open weather API
+https://openweathermap.org/api
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+react router dom
+https://v5.reactrouter.com/web/guides/quick-start
