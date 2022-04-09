@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv').config({ path: "../.env" });;
-
+let path = require('path');
 const port = 5000;
 const routes = require('./routes/index');
 const connectDB = require('./config/connect');
@@ -10,7 +10,7 @@ const { options } = require('./routes/index');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
-app.use(express.static(__dirname + "../frontend/public/index.html"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 connectDB.then(() => {
