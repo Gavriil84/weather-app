@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import './Profile.scss'
 
 const Profile = () => {
     const [profile, setProfile] = useState({});
@@ -19,7 +19,7 @@ const Profile = () => {
 
     useEffect(() => {
         function userProfile() {
-            axios.get(`http://localhost:5000/api/v1/profile/${userId}`)
+            axios.get(`https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile/${userId}`)
                 .then(
                     res => setProfile(res.data)
                 ).catch(error => console.log(error))
@@ -44,7 +44,7 @@ const Profile = () => {
         localStorage.removeItem('userInfo')
     }
     return (
-        <div>
+        <div className='profile'>
 
             <h1>Hi, {profile.userName}!</h1>
 

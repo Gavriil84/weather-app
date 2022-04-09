@@ -45,7 +45,7 @@ const Home = () => {
             favorite: favoriteArr
         }
 
-        axios.put(`/api/v1/profile/${userId}`, favoriteLocation)
+        axios.put(`https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile/${userId}`, favoriteLocation)
     }
 
     const debouncedSave = useCallback(
@@ -78,8 +78,10 @@ const Home = () => {
                     <h2>Current Weather</h2>
                     <div className="location">
                         <p>{currWeather.name}</p>
-                        <Button onClick={(e) => addFavorite(e)}>Add Favorite</Button>
-                        <Button onClick={updateFavorite}>Update Favorite List</Button>
+                        <div className="btn">
+                            <Button className="addFavorite" onClick={(e) => addFavorite(e)}>Add Favorite</Button>
+                            <Button className="updateFavorite" onClick={updateFavorite}>Update Favorite List</Button>
+                        </div>
                     </div>
                     <div className="currentTemp">
                         {currWeather.main ? (<p>{currWeather.main.temp.toFixed(1)} &#8451;</p>) : (null)}

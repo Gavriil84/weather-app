@@ -22,7 +22,7 @@ const Login = () => {
                 }
             }
 
-            const { data } = await axios.post('/api/v1/login', { email, password }, config)
+            const { data } = await axios.post('https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/login', { email, password }, config)
 
             if (email == data.email && password == data.password) {
                 localStorage.setItem('userInfo', JSON.stringify(data.id))
@@ -66,7 +66,7 @@ const Login = () => {
                 </label>
 
                 <span>Don't have an account? <Link to='/signup'>Create account</Link></span>
-                <Button type='submit' >Log In</Button>
+                <Button className='loginbtn' type='submit' >Log In</Button>
             </form>
         </div>
     )

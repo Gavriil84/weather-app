@@ -1,0 +1,23 @@
+.loginbtn,
+.signupbtn {
+    background-color: #afedee;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.addFavorite {
+    border-radius: 8px;
+    border: none;
+    padding: 5px 5px;
+    background-color: gold;
+    cursor: pointer;
+}
+
+.updateFavorite {
+    border-radius: 8px;
+    border: none;
+    padding: 5px 5px;
+    background-color: rgb(255, 174, 0);
+    cursor: pointer;
+}

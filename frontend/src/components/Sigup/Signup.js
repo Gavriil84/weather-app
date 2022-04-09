@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../shared/Button';
+import './Signup.scss'
 
 const Signup = (props) => {
 
@@ -22,7 +23,7 @@ const Signup = (props) => {
             }
 
 
-            const { data } = await axios.post('/api/v1/profile', { email, userName, password }, config)
+            const { data } = await axios.post('https://wmdd4936-gwatanabe00.herokuapp.com/api/v1/profile', { email, userName, password }, config)
             setEmail('')
             setPassword('')
             setUserName('')
@@ -72,7 +73,7 @@ const Signup = (props) => {
                 </label>
 
                 <span>Already have an account? <Link to='/'>Log in</Link></span>
-                <Button type='submit' >Create Account</Button>
+                <Button className='signupbtn' type='submit' >Create Account</Button>
             </form>
         </div>
     )
